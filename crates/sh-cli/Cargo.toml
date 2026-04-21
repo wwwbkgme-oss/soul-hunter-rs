@@ -1,0 +1,37 @@
+[package]
+name = "sh-cli"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Command-line interface for Soul Hunter RS"
+
+[[bin]]
+name = "soul-hunter"
+path = "src/main.rs"
+
+[dependencies]
+sh-types = { workspace = true }
+sh-core = { workspace = true }
+
+# Async
+tokio = { workspace = true }
+
+# CLI
+clap = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }
+
+# Tracing
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+# Error handling
+anyhow = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }

@@ -1,0 +1,41 @@
+[package]
+name = "sh-finding"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Security finding processing, correlation, and deduplication engine for Soul Hunter"
+
+[dependencies]
+sh-types = { workspace = true }
+sh-event-bus = { workspace = true }
+
+# Async
+tokio = { workspace = true }
+async-trait = { workspace = true }
+futures = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Tracing
+tracing = { workspace = true }
+
+# Time
+chrono = { workspace = true }
+
+# UUID
+uuid = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# Collections
+dashmap = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }
+tokio-test = "0.4"

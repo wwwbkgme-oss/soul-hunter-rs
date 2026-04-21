@@ -1,0 +1,1 @@
+(dyn Fn(sh_types::Event) -> Pin<Box<(dyn std::future::Future<Output = ()> + Send + 'static)>> + Send + Sync + 'static)

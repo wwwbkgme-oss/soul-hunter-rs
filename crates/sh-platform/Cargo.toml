@@ -1,0 +1,54 @@
+[package]
+name = "sh-platform"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Platform adapters for Soul Hunter RS - Android, iOS, IoT"
+
+[dependencies]
+sh-types = { workspace = true }
+
+# Async
+tokio = { workspace = true }
+async-trait = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Tracing
+tracing = { workspace = true }
+
+# Time
+chrono = { workspace = true }
+
+# UUID
+uuid = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# ZIP/APK parsing
+zip = { version = "0.6", optional = true }
+
+# XML parsing
+quick-xml = { version = "0.31", features = ["serialize"], optional = true }
+
+# Binary parsing
+nom = { version = "7.1", optional = true }
+
+# plist parsing for iOS
+plist = { version = "1.6", optional = true }
+
+[features]
+default = ["android", "ios", "iot"]
+android = ["dep:zip", "dep:quick-xml", "dep:nom"]
+ios = ["dep:zip", "dep:plist", "dep:nom"]
+iot = ["dep:quick-xml", "dep:nom"]
+
+[dev-dependencies]
+tokio = { workspace = true }
+tempfile = "3.9"

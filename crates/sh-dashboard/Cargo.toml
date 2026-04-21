@@ -1,0 +1,53 @@
+[package]
+name = "sh-dashboard"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Real-time WebSocket dashboard and Web UI for Soul Hunter security analysis platform"
+
+[dependencies]
+# Internal dependencies
+sh-types = { workspace = true }
+sh-core = { workspace = true }
+
+# Async runtime
+tokio = { workspace = true }
+async-trait = { workspace = true }
+futures = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Tracing
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+# Time
+chrono = { workspace = true }
+
+# UUID
+uuid = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# Collections
+dashmap = { workspace = true }
+
+# HTTP/WebSocket Server
+warp = { workspace = true }
+
+[features]
+default = ["server"]
+server = []
+
+[[bin]]
+name = "sh-dashboard-server"
+path = "src/server_main.rs"
+
+[dev-dependencies]
+tokio = { workspace = true }

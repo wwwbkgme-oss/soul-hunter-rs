@@ -1,0 +1,4 @@
+memory allocation of 262144 bytes failed
+stack backtrace:
+memory allocation of 26576 bytes failed
+skipping backtrace printing to avoid potential recursion

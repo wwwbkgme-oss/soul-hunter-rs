@@ -1,0 +1,58 @@
+[package]
+name = "sh-wasm"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "WASM sandbox and runtime for Soul Hunter RS"
+
+[dependencies]
+# Internal dependencies
+sh-types = { workspace = true }
+sh-skills = { workspace = true }
+
+# Async runtime
+tokio = { workspace = true }
+async-trait = { workspace = true }
+futures = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Tracing
+tracing = { workspace = true }
+
+# Time
+chrono = { workspace = true }
+
+# UUID
+uuid = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# WASM runtime - using version 35.0 as specified
+wasmtime = { version = "35.0", features = ["component-model", "async"] }
+wasmtime-wasi = { version = "35.0" }
+
+# WASI support
+wasi-common = { version = "35.0" }
+cap-std = { version = "3.0" }
+cap-async-std = { version = "3.0" }
+
+# Resource limits
+rlimit = "0.10"
+
+# Memory management
+bytes = "1.5"
+
+# Collections
+dashmap = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }
+tempfile = "3.9"
+wasmtime = { version = "35.0", features = ["component-model", "async", "cranelift"] }

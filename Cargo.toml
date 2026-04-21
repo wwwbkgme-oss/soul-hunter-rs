@@ -1,0 +1,163 @@
+[package]
+name = "soul-hunter-rs"
+version = "0.1.0"
+edition = "2021"
+authors = ["Soul Hunter Team"]
+description = "Unified Security Analysis Platform - Merging newbie-rs, tracker-brain-rs, and zero-hero-rs"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/soul-hunter/soul-hunter-rs"
+readme = "README.md"
+
+[workspace]
+resolver = "2"
+members = [
+    "crates/sh-types",
+    "crates/sh-core",
+    "crates/sh-event-bus",
+    "crates/sh-scheduler",
+    "crates/sh-worker",
+    "crates/sh-executor",
+    "crates/sh-agents",
+    "crates/sh-tools",
+    "crates/sh-skills",
+    "crates/sh-risk",
+    "crates/sh-graph",
+    "crates/sh-evidence",
+    "crates/sh-finding",
+    "crates/sh-policy",
+    "crates/sh-llm",
+    "crates/sh-wasm",
+    "crates/sh-distributed",
+    "crates/sh-orchestrator",
+    "crates/sh-dashboard",
+    "crates/sh-platform",
+    "crates/sh-cli",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Soul Hunter Team"]
+license = "MIT OR Apache-2.0"
+rust-version = "1.70"
+
+[workspace.dependencies]
+# Async
+tokio = { version = "1.35", features = ["full"] }
+tokio-util = { version = "0.7", features = ["rt"] }
+async-trait = "0.1"
+futures = "0.3"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_yaml = "0.9"
+
+# Tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Time
+chrono = { version = "0.4", features = ["serde"] }
+
+# UUID
+uuid = { version = "1.6", features = ["v4", "serde"] }
+
+# Error
+thiserror = "1.0"
+anyhow = "1.0"
+
+# Collections
+dashmap = "5.5"
+
+# CLI
+clap = { version = "4.5", features = ["derive"] }
+
+# HTTP
+reqwest = { version = "0.12", features = ["json"] }
+
+# Server
+axum = "0.7"
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+warp = "0.3"
+
+# WASM
+wasmtime = { version = "44.0", features = ["llvm", "sys"] }
+
+# Crypto
+ring = "0.17"
+ed25519-dalek = { version = "2.0", features = ["rand_core"] }
+hex = "0.4"
+sha2 = "0.10"
+
+# sh-orchestrator extras
+futures-intrusive = "0.5"
+parking_lot = "0.12"
+crossbeam = "0.8"
+memoffset = "0.9"
+generational-arena = "0.2"
+hashbrown = "0.14"
+indexmap = "2.1"
+blake3 = "1.3"
+
+# Workspace members - using path for all
+sh-types = { path = "crates/sh-types" }
+sh-core = { path = "crates/sh-core" }
+sh-event-bus = { path = "crates/sh-event-bus" }
+sh-scheduler = { path = "crates/sh-scheduler" }
+sh-worker = { path = "crates/sh-worker" }
+sh-executor = { path = "crates/sh-executor" }
+sh-agents = { path = "crates/sh-agents" }
+sh-tools = { path = "crates/sh-tools" }
+sh-skills = { path = "crates/sh-skills" }
+sh-risk = { path = "crates/sh-risk" }
+sh-graph = { path = "crates/sh-graph" }
+sh-evidence = { path = "crates/sh-evidence" }
+sh-finding = { path = "crates/sh-finding" }
+sh-policy = { path = "crates/sh-policy" }
+sh-llm = { path = "crates/sh-llm" }
+sh-wasm = { path = "crates/sh-wasm" }
+sh-distributed = { path = "crates/sh-distributed" }
+sh-orchestrator = { path = "crates/sh-orchestrator" }
+sh-dashboard = { path = "crates/sh-dashboard" }
+sh-platform = { path = "crates/sh-platform" }
+sh-cli = { path = "crates/sh-cli" }
+
+[dependencies]
+sh-cli = { path = "crates/sh-cli" }
+sh-orchestrator = { path = "crates/sh-orchestrator", optional = true }
+
+[features]
+default = ["cli", "analysis"]
+cli = []
+server = []
+dashboard = []
+analysis = ["static-analysis", "dynamic-analysis", "network-analysis"]
+static-analysis = []
+dynamic-analysis = []
+network-analysis = []
+crypto-analysis = []
+intent-analysis = []
+wasm-sandbox = []
+distributed = []
+evidence-chain = []
+attack-graph = []
+llm-inference = []
+policy-enforcement = []
+full = ["cli", "server", "dashboard", "static-analysis", "dynamic-analysis", "network-analysis", "crypto-analysis", "intent-analysis", "wasm-sandbox", "distributed", "evidence-chain", "attack-graph", "llm-inference", "policy-enforcement"]
+
+[profile.release]
+opt-level = 3
+lto = true
+strip = true
+codegen-units = 1
+panic = "abort"
+
+[profile.dev]
+debug = true
+incremental = true
+
+[[bin]]
+name = "soul-hunter"
+path = "crates/sh-cli/src/main.rs"

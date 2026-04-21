@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soul Hunter - Security Analysis Platform</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <path d="M16 2L28 9V23L16 30L4 23V9L16 2Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <circle cx="16" cy="16" r="6" fill="currentColor"/>
+                    </svg>
+                    <span>Soul Hunter</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12h18M3 6h18M3 18h18"/>
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-section-title">Overview</span>
+                    <a href="#" class="nav-link active" data-view="dashboard">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"/>
+                            <rect x="14" y="3" width="7" height="7"/>
+                            <rect x="14" y="14" width="7" height="7"/>
+                            <rect x="3" y="14" width="7" height="7"/>
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="nav-link" data-view="projects">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        <span>Projects</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-title">Analysis</span>
+                    <a href="#" class="nav-link" data-view="new-assessment">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="16"/>
+                            <line x1="8" y1="12" x2="16" y2="12"/>
+                        </svg>
+                        <span>New Assessment</span>
+                    </a>
+                    <a href="#" class="nav-link" data-view="sessions">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                        <span>Active Sessions</span>
+                    </a>
+                    <a href="#" class="nav-link" data-view="findings">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <span>Findings</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-title">Configuration</span>
+                    <a href="#" class="nav-link" data-view="tools">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                        </svg>
+                        <span>Tool Configuration</span>
+                    </a>
+                    <a href="#" class="nav-link" data-view="agents">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                            <line x1="12" y1="19" x2="12" y2="23"/>
+                            <line x1="8" y1="23" x2="16" y2="23"/>
+                        </svg>
+                        <span>Agents</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-title">Administration</span>
+                    <a href="#" class="nav-link" data-view="settings">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>
+                        <span>Settings</span>
+                    </a>
+                    <a href="#" class="nav-link" data-view="monitoring">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 20v-6M6 20V10M18 20V4"/>
+                        </svg>
+                        <span>Monitoring</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="connection-status" id="connectionStatus">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Connecting...</span>
+                </div>
+                <div class="version">v0.1.0</div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="top-bar-left">
+                    <h1 class="page-title" id="pageTitle">Dashboard</h1>
+                </div>
+                <div class="top-bar-right">
+                    <button class="btn btn-primary" id="quickActionBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        New Assessment
+                    </button>
+                    <div class="user-menu">
+                        <button class="user-menu-btn">
+                            <span class="user-avatar">A</span>
+                            <span class="user-name">Admin</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Dashboard View -->
+                <div class="view active" id="dashboardView">
+                    <!-- Stats Cards -->
+                    <div class="stats-grid">
+                        <div class="stat-card primary">
+                            <div class="stat-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                    <path d="M2 17l10 5 10-5"/>
+                                    <path d="M2 12l10 5 10-5"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="activeSessions">0</div>
+                                <div class="stat-label">Active Sessions</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="totalFindings">0</div>
+                                <div class="stat-label">Total Findings</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card critical">
+                            <div class="stat-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="criticalFindings">0</div>
+                                <div class="stat-label">Critical</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card warning">
+                            <div class="stat-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="highFindings">0</div>
+                                <div class="stat-label">High</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts & Activity -->
+                    <div class="dashboard-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Findings by Severity</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="severity-chart" id="severityChart">
+                                    <div class="severity-bar critical">
+                                        <div class="bar-header">
+                                            <span class="bar-label">Critical</span>
+                                            <span class="bar-value" id="criticalCount">0</span>
+                                        </div>
+                                        <div class="bar-track">
+                                            <div class="bar-fill" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="severity-bar high">
+                                        <div class="bar-header">
+                                            <span class="bar-label">High</span>
+                                            <span class="bar-value" id="highCount">0</span>
+                                        </div>
+                                        <div class="bar-track">
+                                            <div class="bar-fill" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="severity-bar medium">
+                                        <div class="bar-header">
+                                            <span class="bar-label">Medium</span>
+                                            <span class="bar-value" id="mediumCount">0</span>
+                                        </div>
+                                        <div class="bar-track">
+                                            <div class="bar-fill" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="severity-bar low">
+                                        <div class="bar-header">
+                                            <span class="bar-label">Low</span>
+                                            <span class="bar-value" id="lowCount">0</span>
+                                        </div>
+                                        <div class="bar-track">
+                                            <div class="bar-fill" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="severity-bar info">
+                                        <div class="bar-header">
+                                            <span class="bar-label">Info</span>
+                                            <span class="bar-value" id="infoCount">0</span>
+                                        </div>
+                                        <div class="bar-track">
+                                            <div class="bar-fill" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Recent Activity</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="activity-list" id="activityList">
+                                    <div class="activity-item empty">
+                                        <span>No recent activity</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Active Sessions -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Active Sessions</h3>
+                            <button class="btn btn-secondary btn-sm" id="refreshSessions">Refresh</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-container">
+                                <table class="data-table" id="sessionsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Target</th>
+                                            <th>Platform</th>
+                                            <th>Status</th>
+                                            <th>Progress</th>
+                                            <th>Findings</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="sessionsTableBody">
+                                        <tr class="empty-row">
+                                            <td colspan="7">No active sessions</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects View -->
+                <div class="view" id="projectsView">
+                    <div class="page-header">
+                        <h2>Projects</h2>
+                        <button class="btn btn-primary" id="newProjectBtn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                            New Project
+                        </button>
+                    </div>
+
+                    <!-- Project Statistics -->
+                    <div class="stats-grid project-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="totalProjects">0</div>
+                                <div class="stat-label">Total Projects</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="activeProjects">0</div>
+                                <div class="stat-label">Active Projects</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="totalAssessments">0</div>
+                                <div class="stat-label">Total Assessments</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projects Grid -->
+                    <div class="projects-grid" id="projectsGrid">
+                        <!-- Projects will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Create Project Modal -->
+                <div class="modal" id="createProjectModal">
+                    <div class="modal-overlay"></div>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Create New Project</h3>
+                            <button class="modal-close" id="closeProjectModal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="createProjectForm">
+                                <div class="form-group">
+                                    <label for="projectName">Project Name *</label>
+                                    <input type="text" id="projectName" placeholder="e.g., Mobile Banking App" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="projectDescription">Description</label>
+                                    <textarea id="projectDescription" rows="3" placeholder="Brief description of the project"></textarea>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="projectPlatform">Primary Platform</label>
+                                        <select id="projectPlatform">
+                                            <option value="android">Android</option>
+                                            <option value="ios">iOS</option>
+                                            <option value="iot">IoT/Firmware</option>
+                                            <option value="multi">Multi-Platform</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="projectTeam">Team</label>
+                                        <select id="projectTeam">
+                                            <option value="">Select Team</option>
+                                            <option value="security">Security Team</option>
+                                            <option value="dev">Development</option>
+                                            <option value="qa">QA Team</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tags</label>
+                                    <div class="tag-input" id="projectTags">
+                                        <input type="text" placeholder="Add tag and press Enter">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" id="cancelProjectBtn">Cancel</button>
+                            <button class="btn btn-primary" id="saveProjectBtn">Create Project</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Settings Modal -->
+                <div class="modal" id="projectSettingsModal">
+                    <div class="modal-overlay"></div>
+                    <div class="modal-content modal-large">
+                        <div class="modal-header">
+                            <h3>Project Settings</h3>
+                            <button class="modal-close" id="closeProjectSettings">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="settings-tabs">
+                                <div class="settings-tab active" data-tab="general">General</div>
+                                <div class="settings-tab" data-tab="analysis">Analysis</div>
+                                <div class="settings-tab" data-tab="notifications">Notifications</div>
+                                <div class="settings-tab" data-tab="access">Access Control</div>
+                            </div>
+                            <div class="settings-panels">
+                                <div class="settings-panel active" id="projectGeneralPanel">
+                                    <div class="form-group">
+                                        <label>Project Name</label>
+                                        <input type="text" id="editProjectName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea id="editProjectDescription" rows="3"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select id="editProjectStatus">
+                                            <option value="active">Active</option>
+                                            <option value="archived">Archived</option>
+                                            <option value="paused">Paused</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="settings-panel" id="projectAnalysisPanel">
+                                    <div class="form-group">
+                                        <label>Default Risk Threshold</label>
+                                        <select id="editProjectRiskThreshold">
+                                            <option value="low">Low</option>
+                                            <option value="medium">Medium</option>
+                                            <option value="high">High</option>
+                                            <option value="critical">Critical</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Auto-Scan on Upload</label>
+                                        <input type="checkbox" id="editAutoScan">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Analysis Types</label>
+                                        <div class="checkbox-group">
+                                            <label><input type="checkbox" checked> Static Analysis</label>
+                                            <label><input type="checkbox"> Dynamic Analysis</label>
+                                            <label><input type="checkbox"> Network Analysis</label>
+                                            <label><input type="checkbox"> Crypto Analysis</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="settings-panel" id="projectNotificationsPanel">
+                                    <div class="form-group">
+                                        <label>Email Notifications</label>
+                                        <div class="checkbox-group">
+                                            <label><input type="checkbox" checked> New findings discovered</label>
+                                            <label><input type="checkbox" checked> Assessment completed</label>
+                                            <label><input type="checkbox"> Critical findings only</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="settings-panel" id="projectAccessPanel">
+                                    <div class="form-group">
+                                        <label>Project Members</label>
+                                        <div class="members-list" id="projectMembersList">
+                                            <!-- Members will be loaded here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" id="deleteProjectBtn">Delete Project</button>
+                            <button class="btn btn-secondary" id="cancelProjectSettings">Cancel</button>
+                            <button class="btn btn-primary" id="saveProjectSettings">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Assessment Wizard -->
+                <div class="view" id="new-assessmentView">
+                    <div class="wizard-container">
+                        <div class="wizard-header">
+                            <h2>New Assessment</h2>
+                            <div class="wizard-steps">
+                                <div class="wizard-step active" data-step="1">
+                                    <div class="step-number">1</div>
+                                    <div class="step-label">Target</div>
+                                </div>
+                                <div class="wizard-step" data-step="2">
+                                    <div class="step-number">2</div>
+                                    <div class="step-label">Analysis</div>
+                                </div>
+                                <div class="wizard-step" data-step="3">
+                                    <div class="step-number">3</div>
+                                    <div class="step-label">Options</div>
+                                </div>
+                                <div class="wizard-step" data-step="4">
+                                    <div class="step-number">4</div>
+                                    <div class="step-label">Review</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="wizard-content">
+                            <!-- Step 1: Target Selection -->
+                            <div class="wizard-panel active" id="wizardStep1">
+                                <div class="form-section">
+                                    <h3>Assessment Details</h3>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="assessmentName">Assessment Name *</label>
+                                            <input type="text" id="assessmentName" placeholder="e.g., Production App Security Review" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="projectSelect">Project</label>
+                                            <select id="projectSelect">
+                                                <option value="">Select Project</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h3>Target Selection</h3>
+                                    <div class="target-tabs">
+                                        <div class="target-tab active" data-target="file">File Upload</div>
+                                        <div class="target-tab" data-target="url">URL / Repository</div>
+                                        <div class="target-tab" data-target="device">Connected Device</div>
+                                    </div>
+
+                                    <div class="target-panel active" id="targetFilePanel">
+                                        <div class="file-upload-zone" id="fileUploadZone">
+                                            <div class="upload-icon">
+                                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                                    <polyline points="17 8 12 3 7 8"/>
+                                                    <line x1="12" y1="3" x2="12" y2="15"/>
+                                                </svg>
+                                            </div>
+                                            <div class="upload-text">
+                                                <strong>Drag and drop your file here</strong>
+                                                <span>or click to browse</span>
+                                            </div>
+                                            <div class="upload-hint">Supports APK, IPA, ZIP, and firmware files up to 500MB</div>
+                                            <input type="file" id="targetFileInput" accept=".apk,.ipa,.zip" hidden>
+                                        </div>
+                                        <div class="file-info" id="selectedFileInfo" style="display: none;">
+                                            <div class="file-details">
+                                                <span class="file-name" id="selectedFileName"></span>
+                                                <span class="file-size" id="selectedFileSize"></span>
+                                            </div>
+                                            <button class="btn btn-secondary btn-sm" id="removeFileBtn">Remove</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="target-panel" id="targetUrlPanel">
+                                        <div class="form-group">
+                                            <label for="targetUrl">Repository URL or Download Link</label>
+                                            <input type="url" id="targetUrl" placeholder="https://github.com/user/repo or https://example.com/app.apk">
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="urlAuth">Authentication (optional)</label>
+                                                <select id="urlAuth">
+                                                    <option value="none">None</option>
+                                                    <option value="token">Access Token</option>
+                                                    <option value="basic">Basic Auth</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="urlBranch">Branch / Tag</label>
+                                                <input type="text" id="urlBranch" placeholder="main">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="target-panel" id="targetDevicePanel">
+                                        <div class="device-list" id="connectedDevicesList">
+                                            <div class="device-item empty">
+                                                <span>No devices connected</span>
+                                                <button class="btn btn-secondary btn-sm">Refresh</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="platformSelect">Platform</label>
+                                            <select id="platformSelect">
+                                                <option value="android">Android (APK)</option>
+                                                <option value="ios">iOS (IPA)</option>
+                                                <option value="iot">IoT/Firmware</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="appVersion">App Version (optional)</label>
+                                            <input type="text" id="appVersion" placeholder="1.0.0">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Analysis Types -->
+                            <div class="wizard-panel" id="wizardStep2">
+                                <div class="form-section">
+                                    <h3>Select Analysis Types</h3>
+                                    <div class="analysis-types-grid">
+                                        <label class="analysis-card">
+                                            <input type="checkbox" id="staticAnalysis" checked>
+                                            <div class="analysis-content">
+                                                <div class="analysis-icon">🔍</div>
+                                                <div class="analysis-title">Static Analysis</div>
+                                                <div class="analysis-desc">APK parsing, manifest extraction, code patterns, hardcoded secrets</div>
+                                                <div class="analysis-meta">
+                                                    <span class="meta-item">~5-10 min</span>
+                                                    <span class="meta-item">No execution</span>
+                                                </div>
+                                            </div>
+                                        </label>
+
+                                        <label class="analysis-card">
+                                            <input type="checkbox" id="dynamicAnalysis">
+                                            <div class="analysis-content">
+                                                <div class="analysis-icon">▶️</div>
+                                                <div class="analysis-title">Dynamic Analysis</div>
+                                                <div class="analysis-desc">Runtime monitoring, API tracing, behavior analysis</div>
+                                                <div class="analysis-meta">
+                                                    <span class="meta-item">~15-30 min</span>
+                                                    <span class="meta-item">Requires emulator</span>
+                                                </div>
+                                            </div>
+                                        </label>
+
+                                        <label class="analysis-card">
+                                            <input type="checkbox" id="networkAnalysis">
+                                            <div class="analysis-content">
+                                                <div class="analysis-icon">🌐</div>
+                                                <div class="analysis-title">Network Analysis</div>
+                                                <div class="analysis-desc">Traffic inspection, TLS validation, certificate pinning</div>
+                                                <div class="analysis-meta">
+                                                    <span class="meta-item">~10-20 min</span>
+                                                    <span class="meta-item">Proxy required</span>
+                                                </div>
+                                            </div>
+                                        </label>
+
+                                        <label class="analysis-card">
+                                            <input type="checkbox" id="cryptoAnalysis">
+                                            <div class="analysis-content">
+                                                <div class="analysis-icon">🔐</div>
+                                                <div class="analysis-title">Crypto Analysis</div>
+                                                <div class="analysis-desc">Weak algorithms, hardcoded keys, insecure random</div>
+                                                <div class="analysis-meta">
+                                                    <span class="meta-item">~5-10 min</span>
+                                                    <span class="meta-item">Static only</span>
+                                                </div>
+                                            </div>
+                                        </label>
+
+                                        <label class="analysis-card">
+                                            <input type="checkbox" id="intentAnalysis">
+                                            <div class="analysis-content">
+                                                <div class="analysis-icon">📤</div>
+                                                <div class="analysis-title">Intent Analysis</div>
+                                                <div class="analysis-desc">Component exposure, intent hijacking, deep links</div>
+                                                <div class="analysis-meta">
+                                                    <span class="meta-item">~5-10 min</span>
+                                                    <span class="meta-item">Android only</span>
+                                                </div>
+                                            </div>
+                                        </label>
+
+                                        <label class="analysis-card">
+                                            <input type="checkbox" id="fuzzingAnalysis">
+                                            <div class="analysis-content">
+                                                <div class="analysis-icon">🎯</div>
+                                                <div class="analysis-title">Fuzzing</div>
+                                                <div class="analysis-desc">Input validation, crash detection, edge cases</div>
+                                                <div class="analysis-meta">
+                                                    <span class="meta-item">~30-60 min</span>
+                                                    <span class="meta-item">Resource intensive</span>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Advanced Options -->
+                            <div class="wizard-panel" id="wizardStep3">
+                                <div class="form-section">
+                                    <h3>Analysis Configuration</h3>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="riskThreshold">Risk Threshold</label>
+                                            <select id="riskThreshold">
+                                                <option value="low">Low (All findings)</option>
+                                                <option value="medium">Medium</option>
+                                                <option value="high" selected>High</option>
+                                                <option value="critical">Critical only</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="workerCount">Parallel Workers</label>
+                                            <input type="number" id="workerCount" value="4" min="1" max="64">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="timeout">Timeout (minutes)</label>
+                                            <input type="number" id="timeout" value="60" min="5" max="300">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="executionMode">Execution Mode</label>
+                                            <select id="executionMode">
+                                                <option value="quick">Quick Scan</option>
+                                                <option value="standard" selected>Standard</option>
+                                                <option value="comprehensive">Comprehensive</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h3>Additional Options</h3>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="owaspMapping" checked>
+                                            <span class="checkmark"></span>
+                                            <div class="checkbox-text">
+                                                <strong>OWASP Mobile Top 10 Mapping</strong>
+                                                <span>Classify findings according to OWASP Mobile Top 10</span>
+                                            </div>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="cvssScoring" checked>
+                                            <span class="checkmark"></span>
+                                            <div class="checkbox-text">
+                                                <strong>CVSS Scoring</strong>
+                                                <span>Calculate CVSS scores for vulnerabilities</span>
+                                            </div>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="autoCorrelate">
+                                            <span class="checkmark"></span>
+                                            <div class="checkbox-text">
+                                                <strong>Auto-Correlate Findings</strong>
+                                                <span>Automatically correlate related findings</span>
+                                            </div>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" id="generateReport" checked>
+                                            <span class="checkmark"></span>
+                                            <div class="checkbox-text">
+                                                <strong>Generate Report</strong>
+                                                <span>Automatically generate PDF report on completion</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h3>Tool-Specific Options</h3>
+                                    <div class="accordion">
+                                        <div class="accordion-item">
+                                            <div class="accordion-header">
+                                                <span>Static Analysis Options</span>
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="6 9 12 15 18 9"/>
+                                                </svg>
+                                            </div>
+                                            <div class="accordion-content">
+                                                <div class="form-group">
+                                                    <label><input type="checkbox" checked> Decompile APK</label>
+                                                    <label><input type="checkbox" checked> Extract resources</label>
+                                                    <label><input type="checkbox"> Analyze native libraries</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <div class="accordion-header">
+                                                <span>Dynamic Analysis Options</span>
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="6 9 12 15 18 9"/>
+                                                </svg>
+                                            </div>
+                                            <div class="accordion-content">
+                                                <div class="form-group">
+                                                    <label><input type="checkbox" checked> Frida instrumentation</label>
+                                                    <label><input type="checkbox"> SSL pinning bypass</label>
+                                                    <label><input type="checkbox"> Root detection bypass</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 4: Review -->
+                            <div class="wizard-panel" id="wizardStep4">
+                                <div class="review-section">
+                                    <h3>Review Assessment Configuration</h3>
+                                    <div class="review-card">
+                                        <div class="review-header">
+                                            <h4>Target Information</h4>
+                                            <button class="btn btn-text" data-goto="1">Edit</button>
+                                        </div>
+                                        <div class="review-content" id="reviewTargetInfo">
+                                            <!-- Populated by JS -->
+                                        </div>
+                                    </div>
+                                    <div class="review-card">
+                                        <div class="review-header">
+                                            <h4>Analysis Types</h4>
+                                            <button class="btn btn-text" data-goto="2">Edit</button>
+                                        </div>
+                                        <div class="review-content" id="reviewAnalysisTypes">
+                                            <!-- Populated by JS -->
+                                        </div>
+                                    </div>
+                                    <div class="review-card">
+                                        <div class="review-header">
+                                            <h4>Advanced Options</h4>
+                                            <button class="btn btn-text" data-goto="3">Edit</button>
+                                        </div>
+                                        <div class="review-content" id="reviewAdvancedOptions">
+                                            <!-- Populated by JS -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="wizard-footer">
+                            <button class="btn btn-secondary" id="wizardPrevBtn" disabled>Previous</button>
+                            <button class="btn btn-primary" id="wizardNextBtn">Next</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sessions View -->
+                <div class="view" id="sessionsView">
+                    <div class="page-header">
+                        <h2>All Sessions</h2>
+                        <div class="filter-bar">
+                            <input type="text" class="search-input" placeholder="Search sessions..." id="sessionSearch">
+                            <select class="filter-select" id="statusFilter">
+                                <option value="">All Status</option>
+                                <option value="created">Created</option>
+                                <option value="running">Running</option>
+                                <option value="completed">Completed</option>
+                                <option value="failed">Failed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="table-container">
+                            <table class="data-table" id="allSessionsTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Target</th>
+                                        <th>Platform</th>
+                                        <th>Status</th>
+                                        <th>Created</th>
+                                        <th>Duration</th>
+                                        <th>Findings</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="allSessionsTableBody">
+                                    <tr class="empty-row">
+                                        <td colspan="9">No sessions found</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Findings View -->
+                <div class="view" id="findingsView">
+                    <div class="page-header">
+                        <h2>Findings</h2>
+                        <div class="filter-bar">
+                            <select class="filter-select" id="severityFilter">
+                                <option value="">All Severities</option>
+                                <option value="critical">Critical</option>
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                                <option value="info">Info</option>
+                            </select>
+                            <select class="filter-select" id="typeFilter">
+                                <option value="">All Types</option>
+                                <option value="static">Static Analysis</option>
+                                <option value="dynamic">Dynamic Analysis</option>
+                                <option value="network">Network</option>
+                                <option value="crypto">Crypto</option>
+                                <option value="intent">Intent</option>
+                            </select>
+                            <button class="btn btn-secondary" id="exportFindings">Export</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="table-container">
+                            <table class="data-table" id="findingsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Severity</th>
+                                        <th>Title</th>
+                                        <th>Type</th>
+                                        <th>OWASP</th>
+                                        <th>Location</th>
+                                        <th>Session</th>
+                                        <th>Time</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="findingsTableBody">
+                                    <tr class="empty-row">
+                                        <td colspan="8">No findings</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools Configuration View -->
+                <div class="view" id="toolsView">
+                    <div class="page-header">
+                        <h2>Tool Configuration</h2>
+                        <div class="filter-bar">
+                            <input type="text" class="search-input" placeholder="Search tools..." id="toolSearch">
+                            <select class="filter-select" id="toolCategoryFilter">
+                                <option value="">All Categories</option>
+                                <option value="analysis">Analysis</option>
+                                <option value="utility">Utility</option>
+                                <option value="integration">Integration</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="tools-grid" id="toolsGrid">
+                        <!-- Static Analyzer -->
+                        <div class="tool-card" data-tool="static-analyzer" data-category="analysis">
+                            <div class="tool-header">
+                                <div class="tool-icon">🔍</div>
+                                <div class="tool-info">
+                                    <h3>Static Analyzer</h3>
+                                    <span class="tool-status enabled" data-status="enabled">Enabled</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked data-tool-toggle="static-analyzer">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="tool-body">
+                                <p class="tool-description">Performs static analysis on APK/IPA files without execution</p>
+                                <div class="tool-config">
+                                    <div class="config-item">
+                                        <label>Max File Size (MB)</label>
+                                        <input type="number" value="100" class="config-input" data-config="maxFileSize">
+                                    </div>
+                                    <div class="config-item">
+                                        <label>Pattern Matching</label>
+                                        <input type="checkbox" checked data-config="patternMatching">
+                                    </div>
+                                    <div class="config-item">
+                                        <label>Decompile APK</label>
+                                        <input type="checkbox" checked data-config="decompileApk">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tool-footer">
+                                <div class="tool-health">
+                                    <span class="health-indicator healthy"></span>
+                                    <span class="health-text">Healthy</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" data-action="configure">Configure</button>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Analyzer -->
+                        <div class="tool-card" data-tool="dynamic-analyzer" data-category="analysis">
+                            <div class="tool-header">
+                                <div class="tool-icon">▶️</div>
+                                <div class="tool-info">
+                                    <h3>Dynamic Analyzer</h3>
+                                    <span class="tool-status enabled" data-status="enabled">Enabled</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked data-tool-toggle="dynamic-analyzer">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="tool-body">
+                                <p class="tool-description">Runtime analysis with emulator/device execution</p>
+                                <div class="tool-config">
+                                    <div class="config-item">
+                                        <label>Emulator Timeout (s)</label>
+                                        <input type="number" value="300" class="config-input" data-config="emulatorTimeout">
+                                    </div>
+                                    <div class="config-item">
+                                        <label>API Tracing</label>
+                                        <input type="checkbox" checked data-config="apiTracing">
+                                    </div>
+                                    <div class="config-item">
+                                        <label>Frida Scripts</label>
+                                        <input type="checkbox" data-config="fridaScripts">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tool-footer">
+                                <div class="tool-health">
+                                    <span class="health-indicator warning"></span>
+                                    <span class="health-text">Emulator not running</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" data-action="configure">Configure</button>
+                            </div>
+                        </div>
+
+                        <!-- Network Analyzer -->
+                        <div class="tool-card" data-tool="network-analyzer" data-category="analysis">
+                            <div class="tool-header">
+                                <div class="tool-icon">🌐</div>
+                                <div class="tool-info">
+                                    <h3>Network Analyzer</h3>
+                                    <span class="tool-status enabled" data-status="enabled">Enabled</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked data-tool-toggle="network-analyzer">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="tool-body">
+                                <p class="tool-description">Network traffic inspection and TLS validation</p>
+                                <div class="tool-config">
+                                    <div class="config-item">
+                                        <label>Proxy Port</label>
+                                        <input type="number" value="8080" class="config-input" data-config="proxyPort">
+                                    </div>
+                                    <div class="config-item">
+                                        <label>SSL Verification</label>
+                                        <input type="checkbox" checked data-config="sslVerification">
+                                    </div>
+                                    <div class="config-item">
+                                        <label>Certificate Pinning Check</label>
+                                        <input type="checkbox" checked data-config="certPinning">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tool-footer">
+                                <div class="tool-health">
+                                    <span class="health-indicator healthy"></span>
+                                    <span class="health-text">Healthy</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" data-action="configure">Configure</button>
+                            </div>
+                        </div>
+
+                        <!-- Crypto Analyzer -->
+                        <div class="tool-card" data-tool="crypto-analyzer" data-category="analysis">
+                            <div class="tool-header">
+                                <div class="tool-icon">🔐</div>
+                                <div class="tool-info">
+                                    <h3>Crypto Analyzer</h3>
+                                    <span class="tool-status enabled" data-status="enabled">Enabled</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked data-tool-toggle="crypto-analyzer">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="tool-body">
+                                <p class="tool-description">Cryptographic implementation analysis</p>
+                                <div class="tool-config">
+                                    <div class="config-item">
+                                        <label>Check Weak Algorithms</label>
+                                        <input type="checkbox" checked data-config="weakAlgorithms">
+                                    </div>
+                                    <div class="config-item">
+                                        <label>Hardcoded Keys</label>
+                                        <input type="checkbox" checked data-config="hardcodedKeys">
+                                    </div>
+                                    <div class="config-item">
+                                        <label>Random Generation</label>
+                                        <input type="checkbox" checked data-config="randomGeneration">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tool-footer">
+                                <div class="tool-health">
+                                    <span class="health-indicator healthy"></span>
+                                    <span class="health-text">Healthy</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" data-action="configure">Configure</button>
+                            </div>
+                        </div>
+
+                        <!-- Intent Analyzer -->
+                        <div class="tool-card" data-tool="intent-analyzer" data-category="analysis">
+                            <div class="tool-header">
+                                <div class="tool-icon">📤</div>
+                                <div class="tool-info">
+                                    <h3>Intent Analyzer</h3>
+                                    <span class="tool-status enabled" data-status="enabled">Enabled</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked data-tool-toggle="intent-analyzer">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="tool-body">
+                                <p class="tool-description">Android component exposure analysis</p>
+                                <div class="tool-config">
+                                    <div class="config-item">
+                                        <label>Exported Components</label>
+                                        <input type="checkbox" checked data-config="exportedComponents">
+                                    </div>
+                                    <div class="config-item">
+                                        <label>Intent Hijacking</label>
+                                        <input type="checkbox" checked data-config="intentHijacking">
+                                    </div>
+                                    <div class="config-item">
+                                        <label>Deep Link Analysis</label>
+                                        <input type="checkbox" checked data-config="deepLinks">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tool-footer">
+                                <div class="tool-health">
+                                    <span class="health-indicator healthy"></span>
+                                    <span class="health-text">Healthy</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" data-action="configure">Configure</button>
+                            </div>
+                        </div>
+
+                        <!-- Fuzzing Engine -->
+                        <div class="tool-card" data-tool="fuzzing-engine" data-category="analysis">
+                            <div class="tool-header">
+                                <div class="tool-icon">🎯</div>
+                                <div class="tool-info">
+                                    <h3>Fuzzing Engine</h3>
+                                    <span class="tool-status disabled" data-status="disabled">Disabled</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" data-tool-toggle="fuzzing-engine">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="tool-body">
+                                <p class="tool-description">Automated fuzzing for input validation</p>
+                                <div class="tool-config">
+                                    <div class="config-item">
+                                        <label>Max Iterations</label>
+                                        <input type="number" value="10000" class="config-input" data-config="maxIterations">
+                                    </div>
+                                    <div class="config-item">
+                                        <label>Mutation Strategy</label>
+                                        <select data-config="mutationStrategy">
+                                            <option value="random">Random</option>
+                                            <option value="bitflip">Bit Flip</option>
+                                            <option value="arithmetic">Arithmetic</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tool-footer">
+                                <div class="tool-health">
+                                    <span class="health-indicator disabled"></span>
+                                    <span class="health-text">Disabled</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" data-action="configure">Configure</button>
+                            </div>
+                        </div>
+
+                        <!-- LLM Integration -->
+                        <div class="tool-card" data-tool="llm-integration" data-category="integration">
+                            <div class="tool-header">
+                                <div class="tool-icon">🤖</div>
+                                <div class="tool-info">
+                                    <h3>LLM Integration</h3>
+                                    <span class="tool-status disabled" data-status="disabled">Disabled</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" data-tool-toggle="llm-integration">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="tool-body">
+                                <p class="tool-description">AI-powered analysis and report generation</p>
+                                <div class="tool-config">
+                                    <div class="config-item">
+                                        <label>Provider</label>
+                                        <select data-config="llmProvider">
+                                            <option value="openai">OpenAI</option>
+                                            <option value="anthropic">Anthropic</option>
+                                            <option value="ollama">Ollama (Local)</option>
+                                            <option value="nvidia">NVIDIA NIM</option>
+                                        </select>
+                                    </div>
+                                    <div class="config-item">
+                                        <label>Model</label>
+                                        <select data-config="llmModel">
+                                            <option value="gpt-4">GPT-4</option>
+                                            <option value="gpt-3.5">GPT-3.5</option>
+                                        </select>
+                                    </div>
+                                    <div class="config-item">
+                                        <label>API Key</label>
+                                        <input type="password" placeholder="Enter API key" data-config="apiKey">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tool-footer">
+                                <div class="tool-health">
+                                    <span class="health-indicator disabled"></span>
+                                    <span class="health-text">Not configured</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" data-action="configure">Configure</button>
+                            </div>
+                        </div>
+
+                        <!-- Report Generator -->
+                        <div class="tool-card" data-tool="report-generator" data-category="utility">
+                            <div class="tool-header">
+                                <div class="tool-icon">📄</div>
+                                <div class="tool-info">
+                                    <h3>Report Generator</h3>
+                                    <span class="tool-status enabled" data-status="enabled">Enabled</span>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked data-tool-toggle="report-generator">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="tool-body">
+                                <p class="tool-description">Generate PDF, HTML, and SARIF reports</p>
+                                <div class="tool-config">
+                                    <div class="config-item">
+                                        <label>Default Format</label>
+                                        <select data-config="defaultFormat">
+                                            <option value="pdf">PDF</option>
+                                            <option value="html">HTML</option>
+                                            <option value="sarif">SARIF</option>
+                                            <option value="json">JSON</option>
+                                        </select>
+                                    </div>
+                                    <div class="config-item">
+                                        <label>Include Evidence</label>
+                                        <input type="checkbox" checked data-config="includeEvidence">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tool-footer">
+                                <div class="tool-health">
+                                    <span class="health-indicator healthy"></span>
+                                    <span class="health-text">Healthy</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" data-action="configure">Configure</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agents View -->
+                <div class="view" id="agentsView">
+                    <div class="page-header">
+                        <h2>Agent Management</h2>
+                        <button class="btn btn-primary" id="addAgentBtn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                            Add Agent
+                        </button>
+                    </div>
+
+                    <!-- Agent Statistics -->
+                    <div class="stats-grid agent-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="totalAgents">0</div>
+                                <div class="stat-label">Total Agents</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon healthy">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="activeAgents">0</div>
+                                <div class="stat-label">Active</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="busyAgents">0</div>
+                                <div class="stat-label">Busy</div>
+                            </div>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                    <line x1="12" y1="9" x2="12" y2="13"/>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="offlineAgents">0</div>
+                                <div class="stat-label">Offline</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agents List -->
+                    <div class="agents-list" id="agentsList">
+                        <!-- Agents will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Add Agent Modal -->
+                <div class="modal" id="addAgentModal">
+                    <div class="modal-overlay"></div>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Add New Agent</h3>
+                            <button class="modal-close" id="closeAgentModal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addAgentForm">
+                                <div class="form-group">
+                                    <label for="agentName">Agent Name *</label>
+                                    <input type="text" id="agentName" placeholder="e.g., Worker-01" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="agentType">Agent Type</label>
+                                    <select id="agentType">
+                                        <option value="static">Static Analysis</option>
+                                        <option value="dynamic">Dynamic Analysis</option>
+                                        <option value="network">Network Analysis</option>
+                                        <option value="crypto">Crypto Analysis</option>
+                                        <option value="general">General Purpose</option>
+                                    </select>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="agentHost">Host / IP</label>
+                                        <input type="text" id="agentHost" placeholder="localhost or 192.168.1.100">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="agentPort">Port</label>
+                                        <input type="number" id="agentPort" value="8080">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="agentCapabilities">Capabilities</label>
+                                    <div class="checkbox-group">
+                                        <label><input type="checkbox" checked> APK Analysis</label>
+                                        <label><input type="checkbox" checked> IPA Analysis</label>
+                                        <label><input type="checkbox"> IoT Firmware</label>
+                                        <label><input type="checkbox"> Network Proxy</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" id="cancelAgentBtn">Cancel</button>
+                            <button class="btn btn-primary" id="saveAgentBtn">Add Agent</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agent Configuration Modal -->
+                <div class="modal" id="agentConfigModal">
+                    <div class="modal-overlay"></div>
+                    <div class="modal-content modal-large">
+                        <div class="modal-header">
+                            <h3>Agent Configuration</h3>
+                            <button class="modal-close" id="closeAgentConfig">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="agent-config-tabs">
+                                <div class="config-tab active" data-tab="basic">Basic</div>
+                                <div class="config-tab" data-tab="resources">Resources</div>
+                                <div class="config-tab" data-tab="scheduling">Scheduling</div>
+                                <div class="config-tab" data-tab="advanced">Advanced</div>
+                            </div>
+                            <div class="config-panels">
+                                <div class="config-panel active" id="agentBasicPanel">
+                                    <div class="form-group">
+                                        <label>Agent Name</label>
+                                        <input type="text" id="configAgentName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea id="configAgentDesc" rows="2"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select id="configAgentStatus">
+                                            <option value="active">Active</option>
+                                            <option value="paused">Paused</option>
+                                            <option value="maintenance">Maintenance</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="config-panel" id="agentResourcesPanel">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Max Concurrent Tasks</label>
+                                            <input type="number" id="configMaxTasks" value="4" min="1" max="16">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>CPU Limit (%)</label>
+                                            <input type="number" id="configCpuLimit" value="80" min="10" max="100">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Memory Limit (MB)</label>
+                                            <input type="number" id="configMemoryLimit" value="4096" min="512">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Disk Limit (GB)</label>
+                                            <input type="number" id="configDiskLimit" value="50" min="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="config-panel" id="agentSchedulingPanel">
+                                    <div class="form-group">
+                                        <label>Priority</label>
+                                        <select id="configPriority">
+                                            <option value="low">Low</option>
+                                            <option value="normal" selected>Normal</option>
+                                            <option value="high">High</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Working Hours</label>
+                                        <div class="time-range">
+                                            <input type="time" id="configWorkStart" value="09:00">
+                                            <span>to</span>
+                                            <input type="time" id="configWorkEnd" value="18:00">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Days Available</label>
+                                        <div class="day-selector">
+                                            <label><input type="checkbox" checked> Mon</label>
+                                            <label><input type="checkbox" checked> Tue</label>
+                                            <label><input type="checkbox" checked> Wed</label>
+                                            <label><input type="checkbox" checked> Thu</label>
+                                            <label><input type="checkbox" checked> Fri</label>
+                                            <label><input type="checkbox"> Sat</label>
+                                            <label><input type="checkbox"> Sun</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="config-panel" id="agentAdvancedPanel">
+                                    <div class="form-group">
+                                        <label>Environment Variables</label>
+                                        <div class="key-value-list" id="agentEnvVars">
+                                            <div class="key-value-row">
+                                                <input type="text" placeholder="KEY" class="key-input">
+                                                <input type="text" placeholder="value" class="value-input">
+                                                <button class="btn btn-icon">&times;</button>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-secondary btn-sm" id="addEnvVar">+ Add Variable</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Labels</label>
+                                        <div class="tag-input" id="agentLabels">
+                                            <input type="text" placeholder="Add label and press Enter">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" id="removeAgentBtn">Remove Agent</button>
+                            <button class="btn btn-secondary" id="cancelAgentConfig">Cancel</button>
+                            <button class="btn btn-primary" id="saveAgentConfig">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings View -->
+                <div class="view" id="settingsView">
+                    <div class="page-header">
+                        <h2>System Settings</h2>
+                    </div>
+
+                    <div class="settings-container">
+                        <div class="settings-sidebar">
+                            <a href="#" class="settings-link active" data-settings="general">General</a>
+                            <a href="#" class="settings-link" data-settings="security">Security</a>
+                            <a href="#" class="settings-link" data-settings="notifications">Notifications</a>
+                            <a href="#" class="settings-link" data-settings="api">API Configuration</a>
+                            <a href="#" class="settings-link" data-settings="workers">Workers</a>
+                            <a href="#" class="settings-link" data-settings="storage">Storage</a>
+                            <a href="#" class="settings-link" data-settings="integrations">Integrations</a>
+                        </div>
+
+                        <div class="settings-content">
+                            <!-- General Settings -->
+                            <div class="settings-panel active" id="generalSettings">
+                                <h3>General Settings</h3>
+                                <div class="form-section">
+                                    <div class="form-group">
+                                        <label for="instanceName">Instance Name</label>
+                                        <input type="text" id="instanceName" value="Soul Hunter Production">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="defaultWorkers">Default Workers</label>
+                                        <input type="number" id="defaultWorkers" value="4" min="1" max="64">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sessionTimeout">Session Timeout (hours)</label>
+                                        <input type="number" id="sessionTimeout" value="24" min="1" max="168">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="timezone">Timezone</label>
+                                        <select id="timezone">
+                                            <option value="UTC">UTC</option>
+                                            <option value="America/New_York">Eastern Time</option>
+                                            <option value="America/Chicago">Central Time</option>
+                                            <option value="America/Denver">Mountain Time</option>
+                                            <option value="America/Los_Angeles">Pacific Time</option>
+                                            <option value="Europe/London">London</option>
+                                            <option value="Europe/Paris">Paris</option>
+                                            <option value="Asia/Tokyo">Tokyo</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dateFormat">Date Format</label>
+                                        <select id="dateFormat">
+                                            <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                                            <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                                            <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Security Settings -->
+                            <div class="settings-panel" id="securitySettings">
+                                <h3>Security Settings</h3>
+                                <div class="form-section">
+                                    <div class="form-group">
+                                        <label>Authentication</label>
+                                        <div class="checkbox-group">
+                                            <label class="checkbox-item">
+                                                <input type="checkbox" id="enableAuth" checked>
+                                                <span class="checkmark"></span>
+                                                <div class="checkbox-text">
+                                                    <strong>Enable Authentication</strong>
+                                                    <span>Require login for dashboard access</span>
+                                                </div>
+                                            </label>
+                                            <label class="checkbox-item">
+                                                <input type="checkbox" id="enableMFA">
+                                                <span class="checkmark"></span>
+                                                <div class="checkbox-text">
+                                                    <strong>Require MFA</strong>
+                                                    <span>Enforce multi-factor authentication</span>
+                                                </div>
+                                            </label>
+                                            <label class="checkbox-item">
+                                                <input type="checkbox" id="enableSSO">
+                                                <span class="checkmark"></span>
+                                                <div class="checkbox-text">
+                                                    <strong>Enable SSO</strong>
+                                                    <span>Allow SSO authentication</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sessionLifetime">Session Lifetime (minutes)</label>
+                                        <input type="number" id="sessionLifetime" value="60" min="5" max="1440">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="maxLoginAttempts">Max Login Attempts</label>
+                                        <input type="number" id="maxLoginAttempts" value="5" min="1" max="10">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>API Security</label>
+                                        <div class="checkbox-group">
+                                            <label><input type="checkbox" checked> Require API key for external access</label>
+                                            <label><input type="checkbox" checked> Rate limiting</label>
+                                            <label><input type="checkbox"> IP whitelist</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Notification Settings -->
+                            <div class="settings-panel" id="notificationsSettings">
+                                <h3>Notification Settings</h3>
+                                <div class="form-section">
+                                    <div class="form-group">
+                                        <label>Email Notifications</label>
+                                        <div class="checkbox-group">
+                                            <label class="checkbox-item">
+                                                <input type="checkbox" id="emailEnabled" checked>
+                                                <span class="checkmark"></span>
+                                                <div class="checkbox-text">
+                                                    <strong>Enable Email Notifications</strong>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="smtpServer">SMTP Server</label>
+                                        <input type="text" id="smtpServer" placeholder="smtp.example.com">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="smtpPort">SMTP Port</label>
+                                            <input type="number" id="smtpPort" value="587">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="smtpSecurity">Security</label>
+                                            <select id="smtpSecurity">
+                                                <option value="tls">TLS</option>
+                                                <option value="ssl">SSL</option>
+                                                <option value="none">None</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Notification Events</label>
+                                        <div class="checkbox-group">
+                                            <label><input type="checkbox" checked> Assessment completed</label>
+                                            <label><input type="checkbox" checked> Critical findings discovered</label>
+                                            <label><input type="checkbox"> High severity findings</label>
+                                            <label><input type="checkbox"> System errors</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Webhook URL (optional)</label>
+                                        <input type="url" id="webhookUrl" placeholder="https://hooks.slack.com/services/...">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- API Configuration -->
+                            <div class="settings-panel" id="apiSettings">
+                                <h3>API Configuration</h3>
+                                <div class="form-section">
+                                    <div class="form-group">
+                                        <label>API Keys</label>
+                                        <div class="api-keys-list" id="apiKeysList">
+                                            <div class="api-key-item">
+                                                <div class="key-info">
+                                                    <span class="key-name">Production Key</span>
+                                                    <span class="key-preview">sh_live_••••••••••••••••</span>
+                                                </div>
+                                                <div class="key-actions">
+                                                    <button class="btn btn-secondary btn-sm">Regenerate</button>
+                                                    <button class="btn btn-danger btn-sm">Revoke</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary" id="generateApiKey">Generate New Key</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="apiRateLimit">Rate Limit (requests/minute)</label>
+                                        <input type="number" id="apiRateLimit" value="100" min="10" max="10000">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="apiTimeout">Request Timeout (seconds)</label>
+                                        <input type="number" id="apiTimeout" value="30" min="5" max="300">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>CORS Origins</label>
+                                        <div class="tag-input" id="corsOrigins">
+                                            <input type="text" placeholder="https://example.com">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Workers Settings -->
+                            <div class="settings-panel" id="workersSettings">
+                                <h3>Worker Configuration</h3>
+                                <div class="form-section">
+                                    <div class="form-group">
+                                        <label for="maxWorkers">Maximum Workers</label>
+                                        <input type="number" id="maxWorkers" value="16" min="1" max="64">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="workerTimeout">Worker Timeout (minutes)</label>
+                                        <input type="number" id="workerTimeout" value="60" min="5" max="300">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="taskQueueSize">Task Queue Size</label>
+                                        <input type="number" id="taskQueueSize" value="1000" min="100" max="10000">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Auto-scaling</label>
+                                        <div class="checkbox-group">
+                                            <label class="checkbox-item">
+                                                <input type="checkbox" id="enableAutoscaling">
+                                                <span class="checkmark"></span>
+                                                <div class="checkbox-text">
+                                                    <strong>Enable Auto-scaling</strong>
+                                                    <span>Automatically scale workers based on queue depth</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Storage Settings -->
+                            <div class="settings-panel" id="storageSettings">
+                                <h3>Storage Configuration</h3>
+                                <div class="form-section">
+                                    <div class="form-group">
+                                        <label for="storageType">Storage Type</label>
+                                        <select id="storageType">
+                                            <option value="local">Local Filesystem</option>
+                                            <option value="s3">Amazon S3</option>
+                                            <option value="gcs">Google Cloud Storage</option>
+                                            <option value="azure">Azure Blob Storage</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="storagePath">Storage Path / Bucket</label>
+                                        <input type="text" id="storagePath" value="/var/lib/soul-hunter">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="maxStorage">Maximum Storage (GB)</label>
+                                        <input type="number" id="maxStorage" value="100" min="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Retention Policy</label>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="retentionDays">Keep data for (days)</label>
+                                                <input type="number" id="retentionDays" value="90" min="1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="archiveAfter">Archive after (days)</label>
+                                                <input type="number" id="archiveAfter" value="30" min="1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Backup</label>
+                                        <div class="checkbox-group">
+                                            <label><input type="checkbox" checked> Enable automatic backups</label>
+                                            <label><input type="checkbox"> Encrypt backups</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Integrations Settings -->
+                            <div class="settings-panel" id="integrationsSettings">
+                                <h3>Integrations</h3>
+                                <div class="form-section">
+                                    <div class="integration-item">
+                                        <div class="integration-header">
+                                            <div class="integration-icon">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                                </svg>
+                                            </div>
+                                            <div class="integration-info">
+                                                <h4>GitHub</h4>
+                                                <p>Import repositories and post results to PRs</p>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="githubIntegration">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="integration-item">
+                                        <div class="integration-header">
+                                            <div class="integration-icon">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                                </svg>
+                                            </div>
+                                            <div class="integration-info">
+                                                <h4>Google Cloud</h4>
+                                                <p>Store results and artifacts in GCS</p>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="gcsIntegration">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="integration-item">
+                                        <div class="integration-header">
+                                            <div class="integration-icon">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                                                </svg>
+                                            </div>
+                                            <div class="integration-info">
+                                                <h4>Jira</h4>
+                                                <p>Create tickets for findings</p>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="jiraIntegration">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monitoring View -->
+                <div class="view" id="monitoringView">
+                    <div class="page-header">
+                        <h2>System Monitoring</h2>
+                        <div class="filter-bar">
+                            <select class="filter-select" id="metricsTimeRange">
+                                <option value="1h">Last Hour</option>
+                                <option value="6h">Last 6 Hours</option>
+                                <option value="24h" selected>Last 24 Hours</option>
+                                <option value="7d">Last 7 Days</option>
+                            </select>
+                            <button class="btn btn-secondary" id="refreshMetrics">Refresh</button>
+                        </div>
+                    </div>
+
+                    <!-- System Health Overview -->
+                    <div class="health-overview">
+                        <div class="health-card" id="systemHealthCard">
+                            <div class="health-status healthy">
+                                <div class="health-icon">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                        <polyline points="22 4 12 14.01 9 11.01"/>
+                                    </svg>
+                                </div>
+                                <div class="health-info">
+                                    <h3>System Health</h3>
+                                    <span class="health-text">All systems operational</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="health-metrics">
+                            <div class="health-metric">
+                                <span class="metric-label">Uptime</span>
+                                <span class="metric-value" id="systemUptime">99.9%</span>
+                            </div>
+                            <div class="health-metric">
+                                <span class="metric-label">Response Time</span>
+                                <span class="metric-value" id="responseTime">45ms</span>
+                            </div>
+                            <div class="health-metric">
+                                <span class="metric-label">Error Rate</span>
+                                <span class="metric-value" id="errorRate">0.01%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Metrics Grid -->
+                    <div class="monitoring-grid">
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <h4>CPU Usage</h4>
+                                <span class="metric-current" id="cpuCurrent">0%</span>
+                            </div>
+                            <div class="metric-chart-container">
+                                <canvas id="cpuChart" width="400" height="150"></canvas>
+                            </div>
+                            <div class="metric-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Avg</span>
+                                    <span class="stat-value" id="cpuAvg">0%</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Peak</span>
+                                    <span class="stat-value" id="cpuPeak">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <h4>Memory Usage</h4>
+                                <span class="metric-current" id="memoryCurrent">0 MB</span>
+                            </div>
+                            <div class="metric-chart-container">
+                                <canvas id="memoryChart" width="400" height="150"></canvas>
+                            </div>
+                            <div class="metric-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Used</span>
+                                    <span class="stat-value" id="memoryUsed">0 MB</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Total</span>
+                                    <span class="stat-value" id="memoryTotal">0 MB</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <h4>Queue Depth</h4>
+                                <span class="metric-current" id="queueCurrent">0</span>
+                            </div>
+                            <div class="metric-chart-container">
+                                <canvas id="queueChart" width="400" height="150"></canvas>
+                            </div>
+                            <div class="metric-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Processed</span>
+                                    <span class="stat-value" id="queueProcessed">0</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Failed</span>
+                                    <span class="stat-value" id="queueFailed">0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <h4>Active Workers</h4>
+                                <span class="metric-current" id="workersCurrent">0</span>
+                            </div>
+                            <div class="metric-chart-container">
+                                <canvas id="workersChart" width="400" height="150"></canvas>
+                            </div>
+                            <div class="metric-stats">
+                                <div class="stat">
+                                    <span class="stat-label">Available</span>
+                                    <span class="stat-value" id="workersAvailable">0</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Busy</span>
+                                    <span class="stat-value" id="workersBusy">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Real-time Events -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Real-time Events</h3>
+                            <button class="btn btn-secondary btn-sm" id="clearEvents">Clear</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="events-list" id="eventsList">
+                                <div class="event-item empty">
+                                    <span>No events</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+[package]
+name = "sh-llm"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Production-ready LLM integration for Soul Hunter RS"
+
+[dependencies]
+sh-types = { workspace = true }
+
+# Async runtime
+tokio = { workspace = true }
+async-trait = { workspace = true }
+futures = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Tracing
+tracing = { workspace = true }
+
+# HTTP Client
+reqwest = { workspace = true, features = ["json", "stream"] }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# Time
+chrono = { workspace = true }
+
+# UUID
+uuid = { workspace = true }
+
+# Streaming support
+bytes = "1.5"
+pin-project = "1.1"
+
+# Rate limiting
+governor = "0.6"
+
+# Retry logic
+backoff = { version = "0.4", features = ["tokio"] }
+
+[dev-dependencies]
+tokio = { workspace = true }
+tokio-test = "0.4"
+wiremock = "0.6"

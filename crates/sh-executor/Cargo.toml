@@ -1,0 +1,47 @@
+[package]
+name = "sh-executor"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Production-ready job execution engine with retry logic, timeout handling, and cancellation support for Soul Hunter RS"
+
+[dependencies]
+# Async runtime
+tokio = { workspace = true }
+tokio-util = { version = "0.7", features = ["rt"] }
+async-trait = { workspace = true }
+futures = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Tracing
+tracing = { workspace = true }
+
+# Time
+chrono = { workspace = true }
+
+# UUID
+uuid = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# Collections
+dashmap = { workspace = true }
+
+# Random
+rand = "0.8"
+
+# Internal dependencies
+sh-types = { workspace = true }
+sh-scheduler = { workspace = true }
+sh-worker = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["test-util", "macros"] }
+tracing-subscriber = { workspace = true }

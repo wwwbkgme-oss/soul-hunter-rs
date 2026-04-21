@@ -1,0 +1,47 @@
+[package]
+name = "sh-tools"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "APK and security analysis tools for Soul Hunter RS"
+
+[dependencies]
+sh-types = { workspace = true }
+
+# Async
+tokio = { workspace = true }
+async-trait = { workspace = true }
+futures = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Tracing
+tracing = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# APK Analysis
+zip = { version = "0.6", default-features = false, features = ["deflate", "time"] }
+quick-xml = { version = "0.31", features = ["serialize"] }
+
+# Pattern matching
+regex = { version = "1.10" }
+
+# Encoding
+data-encoding = { version = "2.5" }
+base64 = { version = "0.21" }
+hex = { workspace = true }
+
+# Cryptography
+sha2 = { workspace = true }
+ring = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }
+tempfile = "3.9"

@@ -1,0 +1,47 @@
+[package]
+name = "sh-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Core orchestration engine for Soul Hunter RS"
+
+[dependencies]
+sh-types = { workspace = true }
+sh-event-bus = { workspace = true }
+sh-scheduler = { workspace = true }
+sh-worker = { workspace = true }
+sh-orchestrator = { workspace = true }
+sh-agents = { workspace = true }
+sh-finding = { workspace = true }
+sh-risk = { workspace = true }
+tokio-util = { workspace = true }
+
+# Async
+tokio = { workspace = true }
+async-trait = { workspace = true }
+futures = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Tracing
+tracing = { workspace = true }
+
+# Time
+chrono = { workspace = true }
+
+# UUID
+uuid = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# Collections
+dashmap = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }

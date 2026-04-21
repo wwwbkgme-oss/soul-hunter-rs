@@ -1,0 +1,1 @@
+impl futures::Future<Output = tokio::sync::RwLockWriteGuard<'_, std::option::Option<Vec<std::string::String>>>>

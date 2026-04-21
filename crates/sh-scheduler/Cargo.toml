@@ -1,0 +1,42 @@
+[package]
+name = "sh-scheduler"
+version = "0.1.0"
+edition = "2021"
+authors = ["Soul Hunter Team"]
+description = "Priority job scheduler with retry and timeout handling for Soul Hunter"
+license = "MIT OR Apache-2.0"
+rust-version = "1.70"
+
+[dependencies]
+# Workspace dependencies
+sh-types = { workspace = true }
+sh-orchestrator = { workspace = true }
+
+# Async runtime
+tokio = { workspace = true }
+async-trait = { workspace = true }
+futures = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Tracing
+tracing = { workspace = true }
+
+# Time
+chrono = { workspace = true }
+
+# UUID
+uuid = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# Collections
+dashmap = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["test-util", "macros"] }
+tracing-subscriber = { workspace = true }

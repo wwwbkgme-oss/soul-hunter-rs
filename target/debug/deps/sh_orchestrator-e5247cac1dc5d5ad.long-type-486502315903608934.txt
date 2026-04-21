@@ -1,0 +1,1 @@
+impl futures::Future<Output = tokio::sync::RwLockWriteGuard<'_, HashMap<HookPhase, Vec<std::string::String>>>>

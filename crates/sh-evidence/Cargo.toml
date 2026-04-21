@@ -1,0 +1,39 @@
+[package]
+name = "sh-evidence"
+version = "0.1.0"
+edition = "2021"
+authors = ["Soul Hunter Team"]
+description = "Cryptographic evidence chain with Merkle trees and Ed25519 signatures"
+license = "MIT OR Apache-2.0"
+rust-version = "1.70"
+
+[dependencies]
+# Core dependencies
+serde = { workspace = true }
+serde_json = { workspace = true }
+chrono = { workspace = true }
+uuid = { workspace = true }
+thiserror = { workspace = true }
+dashmap = { workspace = true }
+
+# Cryptography
+sha2 = "0.10"
+ring = "0.17"
+ed25519-dalek = { version = "2.0", features = ["rand_core"] }
+hex = "0.4"
+
+# Internal dependencies
+sh-types = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["test-util", "macros"] }
+
+[features]
+default = []
+
+[profile.release]
+opt-level = 3
+lto = true
+strip = true
+codegen-units = 1
+panic = "abort"

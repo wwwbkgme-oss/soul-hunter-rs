@@ -1,0 +1,46 @@
+[package]
+name = "sh-distributed"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Distributed execution coordination for Soul Hunter - Redis and NATS backends"
+
+[dependencies]
+# Workspace dependencies
+sh-types = { workspace = true }
+sh-scheduler = { workspace = true }
+
+# Async runtime
+tokio = { workspace = true }
+async-trait = { workspace = true }
+futures = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Tracing
+tracing = { workspace = true }
+
+# Time
+chrono = { workspace = true }
+
+# UUID
+uuid = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# Collections
+dashmap = { workspace = true }
+
+# Distributed backends
+redis = { version = "0.24", features = ["tokio-comp", "connection-manager", "cluster"] }
+async-nats = { version = "0.33", features = ["service"] }
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["test-util", "macros"] }
+tracing-subscriber = { workspace = true }
